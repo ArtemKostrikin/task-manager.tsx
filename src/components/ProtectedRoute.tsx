@@ -2,9 +2,9 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-const ProtectedRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
-  const isAuthenticated = false; // Здесь вы должны добавить логику проверки аутентификации
+const isAuthenticated = true; // Установите в true для тестирования доступа к Profile
 
+const ProtectedRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
   return isAuthenticated ? children : <Navigate to="/" />;
 };
 

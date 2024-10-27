@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
-// Определяем тип контекста
 interface Task {
   id: number;
   title: string;
@@ -10,7 +9,7 @@ interface Task {
 
 interface TaskContextType {
   tasks: Task[];
-  setTasks: React.Dispatch<React.SetStateAction<Task[]>>; // Добавляем setTasks
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 }
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
@@ -23,7 +22,6 @@ export const useTasks = () => {
   return context;
 };
 
-// Провайдер контекста
 export const TaskProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {

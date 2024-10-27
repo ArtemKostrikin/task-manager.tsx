@@ -1,33 +1,24 @@
-import React, { useEffect } from "react";
-import { useTasks } from "../TaskContext";
-import { getTasks } from "../api"; // Подключаем API
+import React from "react";
 
-const Tasks: React.FC = () => {
-  const { tasks, setTasks } = useTasks(); // Используем setTasks из контекста
+interface Task {
+  id: number;
+  title: string;
+  description: string;
+}
 
-  useEffect(() => {
-    const fetchTasks = async () => {
-      const data = await getTasks(); // Получаем задачи с API
-      setTasks(data); // Обновляем задачи в контексте
-    };
+interface TaskItemProps {
+  task: Task;
+  onDelete: (id: number) => void;
+}
 
-    fetchTasks();
-  }, [setTasks]);
-
+const TaskItem: React.FC<TaskItemProps> = ({ task, onDelete }) => {
   return (
     <div>
-      <h1>Tasks</h1>
-      <ul>
-        {tasks.map((task) => (
-          <li key={task.id}>
-            <h2>{task.title}</h2>
-            <p>{task.description}</p>
-            <p>{task.completed ? "Completed" : "Not completed"}</p>
-          </li>
-        ))}
-      </ul>
+      <h2>{task.title}</h2>
+      <p>{task.description}</p>
+      <button onClick={() => onDelete(task.id)}>Удалить</button>
     </div>
   );
 };
 
-export default Tasks;
+export default TaskItem;
